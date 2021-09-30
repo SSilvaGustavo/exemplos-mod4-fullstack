@@ -1,26 +1,27 @@
 import { useState, useEffect } from "react";
 import { Api } from "../../api/Api";
+import ProductCard from "../ProductCard/ProductCard";
 
 export const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-      loadData();
-  }, [])
+    loadData();
+  }, []);
 
   const loadData = async () => {
     const response = await Api.fetchGet();
 
-    const res = await response.json();
+    const results = await response.json();
 
-    setProducts(res.results);
-};
+    setProducts(results);
+  };
 
   return (
     <div>
-        {products.map((product, index) => (
-            <div key={"product_" + index}>{product.name}</div>
-        ))}
+      {products.map((product, index) => (
+        <ProductCard product={product} key={index.id} />
+      ))}
     </div>
-    )
+  );
 };
