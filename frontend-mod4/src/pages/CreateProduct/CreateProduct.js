@@ -30,9 +30,10 @@ export default function CreateProduct(props) {
 
         const body = await response.json()
 
-        if (response.status == 201){
-            const id  = body.id;
-            props.history.push("/product/view/" + id);
+        if (response.status === 201){
+            const {id} = body
+            // const {history} = props // desconstrução do objeto props, pegando o valor history do obj
+            props.history.push(`/product/view/${id}`);
         }else{
 
         }
