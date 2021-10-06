@@ -6,21 +6,21 @@ export const ProductList = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    loadData();
+      const loadProductList = async () => {
+          const response = await Api.buildApiGetRequest(Api.readAllUrl());
+
+          const results = await response.json();
+
+          setProducts(results);
+      };
+
+      loadProductList();
   }, []);
-
-  const loadData = async () => {
-    const response = await Api.fetchGet();
-
-    const results = await response.json();
-
-    setProducts(results);
-  };
 
   return (
     <div>
       {products.map((product, index) => (
-        <ProductCard product={product} key={index.id} />
+        <ProductCard product={product} key={"product_list_" + index.id} />
       ))}
     </div>
   );

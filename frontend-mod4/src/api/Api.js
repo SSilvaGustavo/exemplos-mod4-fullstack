@@ -1,12 +1,27 @@
 export const Api = {
     baseUrl: "http://localhost:3000",
-    
-    // readAllUrl: () => Api.baseUrl + "/product",
 
-    // buildApiGetRequest: url => 
-    //     fetch(url, {
-    //         method: "GET"
-    //     }),
+    // Endpoint - Product
 
-    fetchGet: () => fetch(Api.baseUrl + "/product"),
-}
+    readAllUrl: () => Api.baseUrl + "/product",
+
+    createProductUrl: () => Api.baseUrl + "/product",
+
+    // GET
+    buildApiGetRequest: url =>
+        fetch(url, {
+            method: "GET",
+        }),
+
+        fetchGet: () => fetch(Api.baseUrl + "/product"),
+
+    // POST
+    buildApiPostRequest: (url, body) =>
+        fetch(url, {
+            method: "POST",
+            headers: new Headers({
+                "Content-type": "application/json",
+            }),
+            body: JSON.stringify(body),
+        }),
+};
