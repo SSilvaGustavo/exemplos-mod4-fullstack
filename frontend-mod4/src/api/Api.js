@@ -10,6 +10,8 @@ export const Api = {
     createProductUrl: () => Api.baseUrl + "/product",
     
     udpdateUrl: id => Api.baseUrl + "/product/" + id,
+    
+    deleteUrl: id => Api.baseUrl + "/product/" + id,
 
     // GET
 
@@ -38,5 +40,11 @@ export const Api = {
             "Content-type": "application/json",
         }),
         body: JSON.stringify(body),
+    }),
+
+    // DELETE
+    buildApiDeleteRequest: (url, body) =>
+    fetch(url, {
+        method: "DELETE",
     })
 };
