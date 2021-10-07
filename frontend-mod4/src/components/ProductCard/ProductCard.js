@@ -1,25 +1,28 @@
 import React from "react";
+import { useHistory } from "react-router";
 
-const ProductCard = ({ product }) => {
-  return (
-    <div classname="card">
-      <div classname="card__title">
-        <h2>Product: {product.name}</h2>
-      </div>
-      <br />
-      <div classname="card__price">
-        <b>Price: R${product.price}</b>
-      </div>
-      <br />
-      <div classname="card__images">
-        {product.images.map((image) => (
-          <div classname="card__image">
-          <img src={image.url} alt={product.name + "'s image"} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+export default function ProductCard({ product }) {
+    const history = useHistory();
 
-export default ProductCard;
+    const handleClick = () => {
+        history.push(`/product/view/${product.id}`);
+    };
+
+    return (
+        <div className="card" onClick={handleClick}>
+            <div className="card__title">
+                <h1>{product.name}</h1>
+            </div>
+
+            <div className="card__price">${product.price.toFixed(2)}</div>
+
+            <div className="card__images">
+                {product.images.map((image, index) => (
+                    <div key={`product_image_${index}`} className="card__image">
+                        <img src={image.url} alt={product.name + "'s image"} />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}

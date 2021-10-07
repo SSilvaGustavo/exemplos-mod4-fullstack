@@ -5,15 +5,20 @@ export const Api = {
 
     readAllUrl: () => Api.baseUrl + "/product",
 
+    readByIdUrl: id => Api.baseUrl + "/product/" + id,
+
     createProductUrl: () => Api.baseUrl + "/product",
+    
+    udpdateUrl: id => Api.baseUrl + "/product/" + id,
 
     // GET
+
+    // fetchGet: () => fetch(Api.baseUrl + "/product"), // Forma simplificada
+
     buildApiGetRequest: url =>
         fetch(url, {
             method: "GET",
         }),
-
-        fetchGet: () => fetch(Api.baseUrl + "/product"),
 
     // POST
     buildApiPostRequest: (url, body) =>
@@ -24,4 +29,14 @@ export const Api = {
             }),
             body: JSON.stringify(body),
         }),
+
+    // PATCH
+    buildApiPatchRequest: (url, body) =>
+    fetch(url, {
+        method: "PATCH",
+        headers: new Headers({
+            "Content-type": "application/json",
+        }),
+        body: JSON.stringify(body),
+    })
 };

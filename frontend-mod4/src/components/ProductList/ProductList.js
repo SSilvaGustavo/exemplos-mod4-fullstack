@@ -18,7 +18,7 @@ export const ProductList = () => {
   }, []);
 
   return (
-    <div>
+    <div className="cards">
       {products.map((product, index) => (
         <ProductCard product={product} key={"product_list_" + index.id} />
       ))}
