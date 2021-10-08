@@ -16,6 +16,7 @@ model Product {
   price Int?
 
   images Image[]
+  categories Category[]
 }
 
 model Image {
@@ -25,4 +26,11 @@ model Image {
   productId Int
 
   url String
+}
+
+model Category{
+  id Int @id @default(autoincrement())
+  name String @unique
+
+  products Product[]
 }

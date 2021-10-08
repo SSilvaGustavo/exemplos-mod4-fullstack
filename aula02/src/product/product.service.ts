@@ -1,5 +1,6 @@
 import { Prisma } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
+import { UpdateImageDto } from 'src/image/dto/update-image-dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -11,7 +12,7 @@ export class ProductService {
   private readonly _include = {
     images: {
       select: {
-        id: false,
+        id: true,
         url: true,
       },
     },
@@ -46,8 +47,20 @@ export class ProductService {
     });
   }
 
-  update(id: number, data: UpdateProductDto) {
+  update(id: number, dto: UpdateProductDto) {
     // return `This action updates a #${id} product`;
+
+    const data: Prisma.ProductUpdateInput = {
+      ...dto,
+      images: {
+        upsert: dto.images.map(UpdateImageDto => ({
+          where: { id: UpdateImageDto.id },
+          update: { url: UpdateImageDto.url },
+          create: { url: UpdateImageDto.url },
+        })),
+      },
+    };
+
     return this.prisma.product.update({
       where: { id },
       data,

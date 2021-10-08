@@ -9,7 +9,7 @@ export const Api = {
 
     createProductUrl: () => Api.baseUrl + "/product",
     
-    udpdateUrl: id => Api.baseUrl + "/product/" + id,
+    updateUrl: id => Api.baseUrl + "/product/" + id,
     
     deleteUrl: id => Api.baseUrl + "/product/" + id,
 

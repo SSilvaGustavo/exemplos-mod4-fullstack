@@ -22,6 +22,8 @@ export default function UpdateProduct(props) {
         return <div>Loading...</div>;
     }
 
+    const firstImage = product.images[0]
+
     const handleSubmit = async event => {
         // Previne o comportamento padrão do submit, que no caso do form é o refresh
         event.preventDefault();
@@ -31,18 +33,19 @@ export default function UpdateProduct(props) {
         const price = +event.target.price.value;
         const imageUrl = event.target.imageUrl.value;
 
-        // Constrói um payload com esses dados
+
         const payload = {
             name,
             price,
             images: [
                 {
+                    id: firstImage?.id || -1,
                     url: imageUrl,
                 },
             ],
         };
 
-        // Faz uma requisição no backend
+
         const response = await Api.buildApiPatchRequest(
             Api.updateUrl(id),
             payload
@@ -108,7 +111,7 @@ export default function UpdateProduct(props) {
                         type="text"
                         id="imageUrl"
                         name="imageUrl"
-                        defaultValue={product.images[0]?.url}
+                        defaultValue={firstImage?.url}
                     />
                 </div>
 
