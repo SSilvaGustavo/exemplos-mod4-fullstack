@@ -3,25 +3,28 @@ import { Api } from "../../api/Api";
 import ProductCard from "../ProductCard/ProductCard";
 
 export const ProductList = () => {
-  const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-      const loadProductList = async () => {
-          const response = await Api.buildApiGetRequest(Api.readAllUrl());
+    useEffect(() => {
+        const loadProductList = async () => {
+            const response = await Api.buildApiGetRequest(Api.readAllUrl());
 
-          const results = await response.json();
+            const results = await response.json();
 
-          setProducts(results);
-      };
+            setProducts(results);
+        };
 
-      loadProductList();
-  }, []);
+        loadProductList();
+    }, []);
 
-  return (
-    <div className="cards">
-      {products.map((product, index) => (
-        <ProductCard product={product} key={"product_list_" + index.id} />
-      ))}
-    </div>
-  );
+    return (
+        <div className="cards">
+            {products.map((product, index) => (
+                <ProductCard
+                    key={`product_list_${index}`}
+                    product={product}
+                ></ProductCard>
+            ))}
+        </div>
+    );
 };

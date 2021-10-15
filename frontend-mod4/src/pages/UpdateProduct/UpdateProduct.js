@@ -8,7 +8,10 @@ export default function UpdateProduct(props) {
 
     useEffect(() => {
         const loadProduct = async () => {
-            const response = await Api.buildApiGetRequest(Api.readByIdUrl(id));
+            const response = await Api.buildApiGetRequest(
+                Api.readByIdUrl(id),
+                true
+            );
 
             const results = await response.json();
 
@@ -22,7 +25,7 @@ export default function UpdateProduct(props) {
         return <div>Loading...</div>;
     }
 
-    const firstImage = product.images[0]
+    const firstImage = product.images[0];
 
     const handleSubmit = async event => {
         // Previne o comportamento padrão do submit, que no caso do form é o refresh
@@ -33,7 +36,7 @@ export default function UpdateProduct(props) {
         const price = +event.target.price.value;
         const imageUrl = event.target.imageUrl.value;
 
-
+        // Constrói um payload com esses dados
         const payload = {
             name,
             price,
@@ -45,10 +48,11 @@ export default function UpdateProduct(props) {
             ],
         };
 
-
+        // Faz uma requisição no backend
         const response = await Api.buildApiPatchRequest(
             Api.updateUrl(id),
-            payload
+            payload,
+            true
         );
 
         const body = await response.json();

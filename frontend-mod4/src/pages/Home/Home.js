@@ -1,12 +1,9 @@
-import React from 'react';
-import { ProductList } from '../../components/ProductList/ProductList';
+import { ProductList } from "../../components/ProductList/ProductList";
 
-const Home = () => {
+export function Home() {
     return (
         <div>
-            <ProductList />
+            <ProductList></ProductList>
         </div>
-    )
+    );
 }
-
-export default Home
