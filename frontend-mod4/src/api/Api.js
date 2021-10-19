@@ -1,3 +1,5 @@
+import { JwtHandler } from "../jwt-handler/JwtHandler";
+
 export const Api = {
     baseUrl: "http://localhost:3000",
 
@@ -24,7 +26,7 @@ export const Api = {
     // Auth Header
 
     authHeader: () => ({
-        Authorization: "Bearer " + localStorage.getItem("JWT"),
+        Authorization: "Bearer " + JwtHandler.getJwt(),
     }),
 
     // GET
